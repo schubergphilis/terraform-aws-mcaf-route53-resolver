@@ -4,7 +4,9 @@ provider "aws" {
 
 # vpc
 module "vpc" {
-  source              = "github.com/schubergphilis/terraform-aws-mcaf-vpc"
+  source  = "github.com/schubergphilis/terraform-aws-mcaf-vpc"
+  version = "1.22.1"
+
   name                = "test"
   cidr_block          = "192.168.0.0/24"
   availability_zones  = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
