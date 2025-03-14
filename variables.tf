@@ -50,7 +50,7 @@ variable "security_group_ids" {
 }
 
 variable "security_group_ingress_cidr_blocks" {
-  type        = string
+  type        = list(string)
   default     = ""
   description = "A list of CIDR blocks to allow on security group ingress rules"
 }

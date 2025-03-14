@@ -31,7 +31,7 @@ module "security_group" {
   count = var.create_security_group ? 1 : 0
 
   source  = "schubergphilis/mcaf-security-group/aws"
-  version = "~> 0.1.0"
+  version = "~> 1.0.0"
 
   description = var.security_group_description
   name        = var.security_group_name
