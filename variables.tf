@@ -37,8 +37,8 @@ variable "security_group_description" {
 }
 
 variable "security_group_egress_cidr_blocks" {
-  type        = string
-  default     = "0.0.0.0/0"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
   description = "A list of CIDR blocks to allow on security group egress rules"
   nullable    = false
 }
@@ -51,7 +51,7 @@ variable "security_group_ids" {
 
 variable "security_group_ingress_cidr_blocks" {
   type        = list(string)
-  default     = ""
+  default     = []
   description = "A list of CIDR blocks to allow on security group ingress rules"
 }
 
