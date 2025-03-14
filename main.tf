@@ -21,17 +21,23 @@ resource "aws_route53_resolver_endpoint" "default" {
   }
 }
 
+data "aws_subnet" "selected" {
+  count = var.subnet_ids != null ? 1 : 0
+
+  id = var.subnet_ids[0]
+}
+
 module "security_group" {
   count = var.create_security_group ? 1 : 0
 
   source  = "schubergphilis/mcaf-security-group/aws"
-  version = "0.1.0"
+  version = "~> 0.1.0"
 
   description = var.security_group_description
   name        = var.security_group_name
   name_prefix = var.security_group_name_prefix
   tags        = var.tags
-  vpc_id      = var.vpc_id
+  vpc_id      = data.aws_subnet.selected[0].vpc_id
 
   egress_rules = {
     for protocol in toset(["tcp", "udp"]) : "${protocol}-53" => {

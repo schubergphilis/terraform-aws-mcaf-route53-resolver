@@ -26,14 +26,14 @@ variable "name" {
 
 variable "protocols" {
   type        = list(string)
-  default     = []
+  default     = ["Do53", "DoH"]
   description = "The resolver endpoint protocols"
 }
 
 variable "security_group_description" {
   type        = string
   default     = null
-  description = "This security group is created to allow port 53 for DNS resolver"
+  description = "Route53 Resolver Endpoint Security Group, allows port 53 for DNS resolving"
 }
 
 variable "security_group_egress_cidr_blocks" {

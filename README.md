@@ -2,11 +2,7 @@
 
 Terraform module to create Route53 resolver. This will be useful when creating the Route53 Resolver either inbound or outbound.
 
-Please note that this module does not cover the Resolver query logging.
-
 IMPORTANT: We do not pin modules to versions in our examples. We highly recommend that in your code you pin the version to the exact version you are using so that your infrastructure remains stable.
-
-## Terraform AWS Route53 Resolver Module
 
 <!-- BEGIN_TF_DOCS -->
 
@@ -69,4 +65,4 @@ IMPORTANT: We do not pin modules to versions in our examples. We highly recommen
 
 ## Licensing
 
-100% Open Source and licensed under the Apache License Version 2.0. See [LICENSE](https://github.com/schubergphilis/terraform-aws-mcaf-user/blob/master/LICENSE) for full details.
+100% Open Source and licensed under the Apache License Version 2.0. See [LICENSE](https://github.com/schubergphilis/terraform-aws-mcaf-route53-resolver/blob/master/LICENSE) for full details.
