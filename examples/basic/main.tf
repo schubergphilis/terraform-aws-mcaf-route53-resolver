@@ -23,11 +23,9 @@ module "inbound_resolver_endpoints" {
 
   direction                          = "INBOUND"
   name                               = "resolver-endpoints-example"
-  protocols                          = ["Do53", "DoH"]
   security_group_ingress_cidr_blocks = module.vpc.cidr_block
   security_group_name_prefix         = "resolver-endpoints-example-"
   subnet_ids                         = module.vpc.private_subnet_ids
-  vpc_id                             = module.vpc.id
 }
 
 # Example to create the Route53 Outbound Resolver
@@ -36,9 +34,7 @@ module "outbound_resolver_endpoints" {
 
   direction                          = "OUTBOUND"
   name                               = "resolver-endpoints-example"
-  protocols                          = ["Do53", "DoH"]
   security_group_ingress_cidr_blocks = module.vpc.cidr_block
   security_group_name_prefix         = "resolver-endpoints-example-"
   subnet_ids                         = module.vpc.private_subnet_ids
-  vpc_id                             = module.vpc.id
 }

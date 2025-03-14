@@ -89,9 +89,3 @@ variable "type" {
   default     = "IPV4"
   description = "The resolver endpoint IP type"
 }
-
-variable "vpc_id" {
-  type        = string
-  default     = ""
-  description = "The VPC ID for all the Route53 Resolver Endpoints"
-}
