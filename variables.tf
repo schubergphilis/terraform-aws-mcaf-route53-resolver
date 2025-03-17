@@ -1,9 +1,3 @@
-variable "create_security_group" {
-  type        = bool
-  default     = true
-  description = "Whether to create Security Groups for Route53 Resolver Endpoints"
-}
-
 variable "direction" {
   type        = string
   default     = "INBOUND"
@@ -52,12 +46,6 @@ variable "security_group_ingress_cidr_blocks" {
   type        = list(string)
   description = "A list of CIDR blocks to allow on security group ingress rules"
   nullable    = false
-}
-
-variable "security_group_name" {
-  type        = string
-  default     = null
-  description = "The name of the security group"
 }
 
 variable "security_group_name_prefix" {

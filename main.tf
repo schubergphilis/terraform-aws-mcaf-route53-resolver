@@ -1,5 +1,5 @@
 locals {
-  security_group_ids = var.create_security_group ? [module.security_group[0].id] : var.security_group_ids
+  security_group_ids = var.security_group_name_prefix != null ? [module.security_group[0].id] : var.security_group_ids
   subnet_ids         = [for subnet in var.subnet_ids : { subnet_id = subnet }]
 }
 
@@ -26,13 +26,12 @@ data "aws_subnet" "selected" {
 }
 
 module "security_group" {
-  count = var.create_security_group ? 1 : 0
+  count = var.security_group_name_prefix != null ? 1 : 0
 
   source  = "schubergphilis/mcaf-security-group/aws"
-  version = "~> 1.0.0"
+  version = "~> 2.0.0"
 
   description = var.security_group_description
-  name        = var.security_group_name
   name_prefix = var.security_group_name_prefix
   tags        = var.tags
   vpc_id      = data.aws_subnet.selected.vpc_id
