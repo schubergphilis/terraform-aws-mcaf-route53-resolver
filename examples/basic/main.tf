@@ -4,7 +4,8 @@ provider "aws" {
 
 # vpc
 module "vpc" {
-  source = "github.com/schubergphilis/terraform-aws-mcaf-vpc?ref=v1.22.1"
+  source  = "schubergphilis/mcaf-vpc/aws"
+  version = "~> 1.22.1"
 
   name                = "test"
   cidr_block          = "192.168.0.0/24"
@@ -23,8 +24,8 @@ module "inbound_resolver_endpoints" {
 
   direction                          = "INBOUND"
   name                               = "resolver-endpoints-example"
-  security_group_egress_cidr_blocks  = module.vpc.cidr_block
-  security_group_ingress_cidr_blocks = module.vpc.cidr_block
+  security_group_egress_cidr_blocks  = [module.vpc.cidr_block]
+  security_group_ingress_cidr_blocks = [module.vpc.cidr_block]
   security_group_name_prefix         = "resolver-endpoints-example-"
   subnet_ids                         = module.vpc.private_subnet_ids
 }
@@ -35,8 +36,8 @@ module "outbound_resolver_endpoints" {
 
   direction                          = "OUTBOUND"
   name                               = "resolver-endpoints-example"
-  security_group_egress_cidr_blocks  = module.vpc.cidr_block
-  security_group_ingress_cidr_blocks = module.vpc.cidr_block
+  security_group_egress_cidr_blocks  = [module.vpc.cidr_block]
+  security_group_ingress_cidr_blocks = [module.vpc.cidr_block]
   security_group_name_prefix         = "resolver-endpoints-example-"
   subnet_ids                         = module.vpc.private_subnet_ids
 }
