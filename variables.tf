@@ -1,3 +1,14 @@
+variable "cloudwatch_logging_configuration" {
+  type = object({
+    kms_key_arn       = string
+    log_group_name    = optional(string, "/platform/route53/resolver-query-logs")
+    retention_in_days = optional(number, 90)
+    vpc_id            = string
+  })
+  default     = null
+  description = "Cloudwatch logs configuration"
+}
+
 variable "direction" {
   type        = string
   default     = "INBOUND"
@@ -32,20 +43,43 @@ variable "security_group_description" {
 
 variable "security_group_egress_cidr_blocks" {
   type        = list(string)
+  default     = []
   description = "A list of CIDR blocks to allow on security group egress rules"
-  nullable    = false
+
+  validation {
+    condition = !(
+      var.security_group_name_prefix != null &&
+      var.direction == "OUTBOUND" &&
+      length(var.security_group_egress_cidr_blocks) == 0
+    )
+    error_message = "'security_group_egress_cidr_blocks' must be set when 'security_group_name_prefix' is set and 'direction' is set to 'OUTBOUND'"
+  }
 }
 
 variable "security_group_ids" {
   type        = list(string)
   default     = []
   description = "A list of security group IDs"
+
+  validation {
+    condition     = length(var.security_group_ids) > 0 || var.security_group_name_prefix != null
+    error_message = "Either 'security_group_ids' or 'security_group_name_prefix' must be set"
+  }
 }
 
 variable "security_group_ingress_cidr_blocks" {
   type        = list(string)
+  default     = []
   description = "A list of CIDR blocks to allow on security group ingress rules"
-  nullable    = false
+
+  validation {
+    condition = !(
+      var.security_group_name_prefix != null &&
+      var.direction == "INBOUND" &&
+      length(var.security_group_ingress_cidr_blocks) == 0
+    )
+    error_message = "'security_group_ingress_cidr_blocks' must be set when 'security_group_name_prefix' is set and 'direction' is set to 'INBOUND'"
+  }
 }
 
 variable "security_group_name_prefix" {
