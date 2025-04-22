@@ -1,5 +1,5 @@
 locals {
-  security_group_ids = var.security_group_name_prefix != null ? [module.security_group[0].id] : var.security_group_ids
+  security_group_ids = length(var.security_group_ids) == 0 ? [module.security_group[0].id] : var.security_group_ids
   subnet_ids         = [for subnet in var.subnet_ids : { subnet_id = subnet }]
 }
 
@@ -26,7 +26,7 @@ data "aws_subnet" "selected" {
 }
 
 module "security_group" {
-  count = var.security_group_name_prefix != null ? 1 : 0
+  count = length(var.security_group_ids) == 0 ? 1 : 0
 
   source  = "schubergphilis/mcaf-security-group/aws"
   version = "~> 2.0.0"
@@ -55,4 +55,26 @@ module "security_group" {
       cidr_ipv4   = var.security_group_ingress_cidr_blocks
     }
   }
+}
+
+resource "aws_cloudwatch_log_group" "resolver_query_logs" {
+  count = var.cloudwatch_logging_configuration != null ? 1 : 0
+
+  name              = var.cloudwatch_logging_configuration.log_group_name
+  kms_key_id        = var.cloudwatch_logging_configuration.kms_key_arn
+  retention_in_days = var.cloudwatch_logging_configuration.retention_in_days
+}
+
+resource "aws_route53_resolver_query_log_config" "resolver_query_log_config_cloudwatch" {
+  count = var.cloudwatch_logging_configuration != null ? 1 : 0
+
+  name            = "resolver_query_log_config_cloudwatch"
+  destination_arn = aws_cloudwatch_log_group.resolver_query_logs[0].arn
+}
+
+resource "aws_route53_resolver_query_log_config_association" "resolver_query_config_cloudwatch_association" {
+  count = var.cloudwatch_logging_configuration != null ? 1 : 0
+
+  resolver_query_log_config_id = aws_route53_resolver_query_log_config.resolver_query_log_config_cloudwatch[0].id
+  resource_id                  = data.aws_subnet.selected.vpc_id
 }
