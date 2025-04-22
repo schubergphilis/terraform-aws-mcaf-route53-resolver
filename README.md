@@ -38,16 +38,16 @@ IMPORTANT: We do not pin modules to versions in our examples. We highly recommen
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_cloudwatch_logging_configuration"></a> [cloudwatch\_logging\_configuration](#input\_cloudwatch\_logging\_configuration) | Cloudwatch logs configuration | <pre>object({<br/>    kms_key_arn       = string<br/>    log_group_name    = optional(string, "/platform/route53/resolver-query-logs")<br/>    retention_in_days = optional(number, 90)<br/>  })</pre> | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The resolver endpoint name | `string` | n/a | yes |
-| <a name="input_cloudwatch_logging_configuration"></a> [cloudwatch\_logging\_configuration](#input\_cloudwatch\_logging\_configuration) | Cloudwatch logs configuration | <pre>object({<br/>    kms_key_arn       = string<br/>    log_group_name    = optional(string, "/platform/route53/resolver-query-logs")<br/>    retention_in_days = optional(number, 90)<br/>    vpc_id            = string<br/>  })</pre> | `null` | no |
 | <a name="input_direction"></a> [direction](#input\_direction) | The resolver endpoint flow direction | `string` | `"INBOUND"` | no |
 | <a name="input_ip_address"></a> [ip\_address](#input\_ip\_address) | A list of IP addresses and subnets where Route53 resolver endpoints will be deployed | <pre>list(object({<br/>    ip        = optional(string)<br/>    subnet_id = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_protocols"></a> [protocols](#input\_protocols) | The resolver endpoint protocols | `list(string)` | <pre>[<br/>  "Do53",<br/>  "DoH"<br/>]</pre> | no |
 | <a name="input_security_group_description"></a> [security\_group\_description](#input\_security\_group\_description) | Route53 Resolver Endpoint Security Group, allows port 53 for DNS resolving | `string` | `null` | no |
 | <a name="input_security_group_egress_cidr_blocks"></a> [security\_group\_egress\_cidr\_blocks](#input\_security\_group\_egress\_cidr\_blocks) | A list of CIDR blocks to allow on security group egress rules | `list(string)` | `[]` | no |
-| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | A list of security group IDs | `list(string)` | `[]` | no |
+| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | A list of security group IDs, if not specified a default security group will be created | `list(string)` | `[]` | no |
 | <a name="input_security_group_ingress_cidr_blocks"></a> [security\_group\_ingress\_cidr\_blocks](#input\_security\_group\_ingress\_cidr\_blocks) | A list of CIDR blocks to allow on security group ingress rules | `list(string)` | `[]` | no |
-| <a name="input_security_group_name_prefix"></a> [security\_group\_name\_prefix](#input\_security\_group\_name\_prefix) | The prefix of the security group | `string` | `null` | no |
+| <a name="input_security_group_name_prefix"></a> [security\_group\_name\_prefix](#input\_security\_group\_name\_prefix) | The prefix of the security group | `string` | `"route53-resolver-"` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnets where Route53 resolver endpoints will be deployed | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags for the Route53 resolver endpoint | `map(string)` | `{}` | no |
 | <a name="input_type"></a> [type](#input\_type) | The resolver endpoint IP type | `string` | `"IPV4"` | no |
