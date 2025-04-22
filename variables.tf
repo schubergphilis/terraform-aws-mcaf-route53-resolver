@@ -3,9 +3,7 @@ variable "cloudwatch_logging_configuration" {
     kms_key_arn       = string
     log_group_name    = optional(string, "/platform/route53/resolver-query-logs")
     retention_in_days = optional(number, 90)
-    vpc_id            = string
   })
-  default     = null
   description = "Cloudwatch logs configuration"
 }
 
@@ -48,23 +46,18 @@ variable "security_group_egress_cidr_blocks" {
 
   validation {
     condition = !(
-      var.security_group_name_prefix != null &&
+      length(var.security_group_ids) == 0 &&
       var.direction == "OUTBOUND" &&
       length(var.security_group_egress_cidr_blocks) == 0
     )
-    error_message = "'security_group_egress_cidr_blocks' must be set when 'security_group_name_prefix' is set and 'direction' is set to 'OUTBOUND'"
+    error_message = "'security_group_egress_cidr_blocks' must be set when 'security_group_ids' is not set and 'direction' is set to 'OUTBOUND'"
   }
 }
 
 variable "security_group_ids" {
   type        = list(string)
   default     = []
-  description = "A list of security group IDs"
-
-  validation {
-    condition     = length(var.security_group_ids) > 0 || var.security_group_name_prefix != null
-    error_message = "Either 'security_group_ids' or 'security_group_name_prefix' must be set"
-  }
+  description = "A list of security group IDs, if not specified a default security group will be created"
 }
 
 variable "security_group_ingress_cidr_blocks" {
@@ -74,17 +67,17 @@ variable "security_group_ingress_cidr_blocks" {
 
   validation {
     condition = !(
-      var.security_group_name_prefix != null &&
+      length(var.security_group_ids) == 0 &&
       var.direction == "INBOUND" &&
       length(var.security_group_ingress_cidr_blocks) == 0
     )
-    error_message = "'security_group_ingress_cidr_blocks' must be set when 'security_group_name_prefix' is set and 'direction' is set to 'INBOUND'"
+    error_message = "'security_group_ingress_cidr_blocks' must be set when 'security_group_ids' is not set and 'direction' is set to 'INBOUND'"
   }
 }
 
 variable "security_group_name_prefix" {
   type        = string
-  default     = null
+  default     = "route53-resolver-"
   description = "The prefix of the security group"
 }
 

@@ -1,5 +1,5 @@
 locals {
-  security_group_ids = var.security_group_name_prefix != null ? [module.security_group[0].id] : var.security_group_ids
+  security_group_ids = length(var.security_group_ids) == 0 ? [module.security_group[0].id] : var.security_group_ids
   subnet_ids         = [for subnet in var.subnet_ids : { subnet_id = subnet }]
 }
 
@@ -26,7 +26,7 @@ data "aws_subnet" "selected" {
 }
 
 module "security_group" {
-  count = var.security_group_name_prefix != null ? 1 : 0
+  count = length(var.security_group_ids) == 0 ? 1 : 0
 
   source  = "schubergphilis/mcaf-security-group/aws"
   version = "~> 2.0.0"
@@ -76,5 +76,5 @@ resource "aws_route53_resolver_query_log_config_association" "resolver_query_con
   count = var.cloudwatch_logging_configuration != null ? 1 : 0
 
   resolver_query_log_config_id = aws_route53_resolver_query_log_config.resolver_query_log_config_cloudwatch[0].id
-  resource_id                  = var.cloudwatch_logging_configuration.vpc_id
+  resource_id                  = data.aws_subnet.selected.vpc_id
 }
