@@ -1,15 +1,10 @@
-variable "name_prefix" {
-  type    = string
-  default = "outbound"
-}
-
 variable "resolver_endpoint_id" {
   type        = string
   description = "The ID of the Route 53 resolver endpoint."
 }
 
 variable "resolver_rules" {
-  type        = list(string)
+  type        = map(string)
   description = "Map of resolver rule definitions, keyed by domain."
 }
 
