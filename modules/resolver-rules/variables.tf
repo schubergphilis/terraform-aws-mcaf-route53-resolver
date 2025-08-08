@@ -1,6 +1,6 @@
 variable "name_prefix" {
   type    = string
-  default = "outbound-"
+  default = "outbound"
 }
 
 variable "resolver_endpoint_id" {
