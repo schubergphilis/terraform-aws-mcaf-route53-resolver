@@ -1,5 +1,5 @@
 resource "aws_route53_resolver_rule" "resolver_rules" {
-  for_each = toset(var.resolver_rules)
+  for_each = var.resolver_rules
 
   domain_name          = each.value
   name                 = each.key

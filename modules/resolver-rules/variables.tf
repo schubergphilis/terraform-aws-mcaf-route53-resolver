@@ -5,7 +5,7 @@ variable "resolver_endpoint_id" {
 
 variable "resolver_rules" {
   type        = map(string)
-  description = "Map of resolver rule definitions, keyed by domain."
+  description = "Map of resolver rule definitions"
 }
 
 variable "rule_type" {
