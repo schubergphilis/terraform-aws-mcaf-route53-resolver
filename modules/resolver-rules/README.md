@@ -33,9 +33,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_name_prefix"></a> [name_prefix](#input_name_prefix) | Prefix to use for resolver rule names. | `string` | `"outbound-"` | no |
 | <a name="input_resolver_endpoint_id"></a> [resolver_endpoint_id](#input_resolver_endpoint_id) | The ID of the Route 53 resolver endpoint. | `string` | n/a | yes |
-| <a name="input_resolver_rules"></a> [resolver_rules](#input_resolver_rules) | List of resolver rule domain names to create rules for. | `list(string)` | n/a | yes |
+| <a name="input_resolver_rules"></a> [resolver_rules](#input_resolver_rules) | Map of resolver rule domain names to create rules for. | `map(string)` | n/a | yes |
 | <a name="input_rule_type"></a> [rule_type](#input_rule_type) | The rule type for the resolver rule (usually FORWARD). | `string` | `"FORWARD"` | no |
 | <a name="input_tags"></a> [tags](#input_tags) | Tags to apply to the resolver rules. | `map(string)` | `{}` | no |
 | <a name="input_target_ips"></a> [target_ips](#input_target_ips) | List of IP addresses for the target IPs. | `list(string)` | n/a | yes |
