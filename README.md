@@ -28,17 +28,13 @@ IMPORTANT: We do not pin modules to versions in our examples. We highly recommen
 
 | Name | Type |
 |------|------|
-| [aws_cloudwatch_log_group.resolver_query_logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_route53_resolver_endpoint.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_resolver_endpoint) | resource |
-| [aws_route53_resolver_query_log_config.resolver_query_log_config_cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_resolver_query_log_config) | resource |
-| [aws_route53_resolver_query_log_config_association.resolver_query_config_cloudwatch_association](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_resolver_query_log_config_association) | resource |
 | [aws_subnet.selected](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cloudwatch_logging_configuration"></a> [cloudwatch\_logging\_configuration](#input\_cloudwatch\_logging\_configuration) | Cloudwatch logs configuration | <pre>object({<br/>    kms_key_arn       = string<br/>    log_group_name    = optional(string, "/platform/route53/resolver-query-logs")<br/>    retention_in_days = optional(number, 90)<br/>  })</pre> | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The resolver endpoint name | `string` | n/a | yes |
 | <a name="input_direction"></a> [direction](#input\_direction) | The resolver endpoint flow direction | `string` | `"INBOUND"` | no |
 | <a name="input_ip_address"></a> [ip\_address](#input\_ip\_address) | A list of IP addresses and subnets where Route53 resolver endpoints will be deployed | <pre>list(object({<br/>    ip        = optional(string)<br/>    subnet_id = string<br/>  }))</pre> | `[]` | no |

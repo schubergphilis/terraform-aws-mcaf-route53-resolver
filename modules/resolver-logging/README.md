@@ -10,14 +10,14 @@ IMPORTANT: We do not pin module versions in our examples. We highly recommend th
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 1.9 |
-| <a name="requirement_aws"></a> [aws](#requirement_aws) | >= 5.32 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.32 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider_aws) | >= 5.32 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.32 |
 
 ## Modules
 
@@ -35,9 +35,12 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cloudwatch_logging_configuration"></a> [cloudwatch_logging_configuration](#input_cloudwatch_logging_configuration) | CloudWatch logs configuration. | <pre>object({<br/>  kms_key_arn       = string<br/>  log_group_name    = optional(string, "/platform/route53/resolver-query-logs")<br/>  retention_in_days = optional(number, 90)<br/>})</pre> | n/a | yes |
-| <a name="input_vpc_id"></a> [vpc_id](#input_vpc_id) | The ID of the VPC where the resolver endpoint logging will be associated. | `string` | n/a | yes |
+| <a name="input_cloudwatch_logging_configuration"></a> [cloudwatch\_logging\_configuration](#input\_cloudwatch\_logging\_configuration) | Cloudwatch logs configuration | <pre>object({<br/>    kms_key_arn       = string<br/>    log_group_name    = optional(string, "/platform/route53/resolver-query-logs")<br/>    retention_in_days = optional(number, 90)<br/>  })</pre> | n/a | yes |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC where the resolver endpoint will be created and logging will be associated | `string` | n/a | yes |
 
+## Outputs
+
+No outputs.
 <!-- END_TF_DOCS -->
 
 ## Licensing
