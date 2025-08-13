@@ -11,6 +11,8 @@ This document captures required refactoring on your part when upgrading to a mod
 
 #### Variables
 
+The following variables have been added as part of sub modules:
+
 Submodule: resolver-rules
 
 `resolver_endpoint_id`: The ID of the Route 53 resolver endpoint.
@@ -19,7 +21,7 @@ Submodule: resolver-rules
 `target_ips`: List of IP addresses for the target IPs.
 
 Submodule: resolver-logging
-`cloudwatch_logging_configuration`: Cloudwatch logs configuration, including KMS key ARN, optional log group name (default /platform/route53/resolver-query-logs), and optional retention in days (default 90).
+`cloudwatch_logging_configuration`: Cloudwatch logs configuration, including KMS key ARN.
 `vpc_id`: The ID of the VPC where the resolver endpoint will be created and logging will be associated.
 
 
