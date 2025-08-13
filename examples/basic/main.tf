@@ -2,6 +2,51 @@ provider "aws" {
   region = "eu-west-1"
 }
 
+data "aws_caller_identity" "default" {}
+data "aws_region" "default" {}
+
+data "aws_iam_policy_document" "kms_key_policy" {
+  statement {
+    sid       = "BasePermissions"
+    effect    = "Allow"
+    actions   = ["kms:*"]
+    resources = ["*"]
+
+    principals {
+      type = "AWS"
+      identifiers = [
+        "arn:aws:iam::${data.aws_caller_identity.default.account_id}:root"
+      ]
+    }
+  }
+
+  statement {
+    sid    = "AllowCloudWatchLogsUseKey"
+    effect = "Allow"
+    actions = [
+      "kms:Encrypt",
+      "kms:Decrypt",
+      "kms:ReEncrypt*",
+      "kms:GenerateDataKey*",
+      "kms:DescribeKey"
+    ]
+    resources = ["*"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["logs.${data.aws_region.default.name}.amazonaws.com"]
+    }
+
+    condition {
+      test     = "ArnLike"
+      variable = "kms:EncryptionContext:aws:logs:arn"
+      values = [
+        "arn:aws:logs:${data.aws_region.default.name}:${data.aws_caller_identity.default.account_id}:log-group:*"
+      ]
+    }
+  }
+}
+
 # kms
 module "kms_key" {
   source  = "schubergphilis/mcaf-kms/aws"
