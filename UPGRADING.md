@@ -25,14 +25,11 @@ Submodule: resolver-logging
 `vpc_id`: The ID of the VPC where the resolver endpoint will be created and logging will be associated.
 
 
-### How to upgrade v5.0.0
+### How to upgrade v2.0.0
 
 The Cloudwatch log resources has been moved to a seperate submodule.
 you can call the module for creating the cloudwatch log and move your existing resources.
 
-
-
-if you already have the resolver rule created and you would like to move them to the module then ensure that you move your resources to the module.
 
 ```hcl
 moved {
@@ -51,6 +48,7 @@ moved {
 }
 ```
 
+if you already have the resolver rule created and you would like to move them to the module then ensure that you move your resources to the module.
 
 ```hcl
 moved {
