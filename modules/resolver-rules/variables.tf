@@ -24,3 +24,9 @@ variable "target_ips" {
   type        = list(string)
   description = "List of IP addresses for the target IPs."
 }
+
+variable "vpc_id" {
+  description = "VPC ID where the Route53 Resolver rules should be associated"
+  type        = string
+  default     = null
+}
