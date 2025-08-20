@@ -28,6 +28,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_route53_resolver_rule.resolver_rules](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_resolver_rule) | resource |
+| [aws_route53_resolver_rule_association.rule_association](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_resolver_rule_association) | resource |
 
 ## Inputs
 
@@ -38,6 +39,7 @@ No modules.
 | <a name="input_target_ips"></a> [target\_ips](#input\_target\_ips) | List of IP addresses for the target IPs. | `list(string)` | n/a | yes |
 | <a name="input_rule_type"></a> [rule\_type](#input\_rule\_type) | The rule type for the resolver rule (usually FORWARD). | `string` | `"FORWARD"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to the resolver rules. | `map(string)` | `{}` | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC ID where the Route53 Resolver rules should be associated | `string` | `null` | no |
 
 ## Outputs
 

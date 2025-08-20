@@ -97,15 +97,18 @@ module "outbound_resolver_endpoints" {
   subnet_ids                         = module.vpc.private_subnet_ids
 }
 
-# Example to create the Route53 Outbound Resolver rules
+# Example to create the Route53 Outbound Resolver rules and associate them with the vpc
 module "route53_resolver_rule" {
   source = "../../modules/resolver-rules"
 
   resolver_endpoint_id = module.outbound_resolver_endpoints.route53_resolver_endpoint_id
+  vpc_id               = module.vpc.id
+
   resolver_rules = {
     "outbound-m-adds-p1" = "m-adds-p-1.example.nl"
     "outbound-m-adds-p2" = "m-adds-p-2.example.nl"
   }
+
   target_ips = [
     "10.1.1.1",
     "10.1.1.2"

@@ -14,3 +14,10 @@ resource "aws_route53_resolver_rule" "resolver_rules" {
     }
   }
 }
+
+resource "aws_route53_resolver_rule_association" "rule_association" {
+  for_each = var.vpc_id != null ? var.resolver_rules : {}
+
+  resolver_rule_id = aws_route53_resolver_rule.resolver_rules[each.key].id
+  vpc_id           = var.vpc_id
+}
