@@ -1,3 +1,9 @@
+<!-- migrate-repo:banner -->
+> [!IMPORTANT]
+> **This repository has moved to [`schubergphilis-ep/terraform-aws-mcaf-route53-resolver`](https://github.com/schubergphilis-ep/terraform-aws-mcaf-route53-resolver).**
+> Please update your references and use the new location for issues, PRs, and contributions.
+<!-- migrate-repo:banner -->
+
 # terraform-aws-mcaf-route53-resolver
 
 Terraform module to create Route53 resolver. This will be useful when creating the Route53 Resolver either inbound or outbound.
